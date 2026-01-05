@@ -1,0 +1,24 @@
+class Solution(object):
+    def merge(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        intervals.sort(key=lambda x: x[0])
+        idx, n = 0, len(intervals) - 1
+        res = []
+
+        while(idx<=n):
+            l, r = intervals[idx][0], intervals[idx][1]
+            j = idx + 1
+            while j <= n and r >= intervals[j][0]:
+                l = l if l < intervals[j][0] else intervals[j][0]
+                r = r if r > intervals[j][1] else intervals[j][1]
+                j+=1
+
+            
+            res.append([l, r])
+            idx = j
+   
+        return res
+                
